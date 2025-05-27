@@ -10,3 +10,9 @@ langgraph_supervisor
 faiss-cpu
 pypdf
 streamlit
+SpeechRecognition
+gtts
+pydub
+fastapi
+uvicorn
+python-multipart

@@ -25,9 +25,9 @@ def get_retriever_agent():
     name="retriever_agent",
 )
 
-retriever_agent = get_retriever_agent()
+# retriever_agent = get_retriever_agent()
 
-result = retriever_agent.invoke({"messages": ["Latest news about Apple?"]})
+# result = retriever_agent.invoke({"messages": ["Latest news about Apple?"]})
 
-for i in result["messages"]:
-    i.pretty_print()
+# for i in result["messages"]:
+#     i.pretty_print()
