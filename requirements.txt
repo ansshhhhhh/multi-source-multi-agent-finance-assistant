@@ -1,0 +1,12 @@
+langchain 
+langgraph 
+google-generativeai 
+google-ai-generativelanguage 
+yfinance
+dotenv
+langchain-community
+langchain-google-genai
+langgraph_supervisor
+faiss-cpu
+pypdf
+streamlit
