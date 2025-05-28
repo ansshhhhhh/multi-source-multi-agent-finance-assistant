@@ -24,9 +24,9 @@ def get_supervisor():
         agents=[scraping_agent, retriever_agent, api_agent],
         prompt=(
             "You are a supervisor managing three agents:\n"
-            "- a scraping agent. Assign scraping-related tasks to this agent\n"
-            "- a retriever agent. Provide the link or path to  fetch any documment and it will help you with it's content\n"
-            "- a api agent. Assign finance-related tasks to this agent\n"
+            "- a Financial_agent. Assign financial news related task to it.\n"
+            "- a retriever_agent. retrive the data from vector store and if retrieval confidence < threshold, prompt user clarification.\n"
+            "- a scraping_agent. Provide the link or path of any documment to it and it will help you with it's content\n"
             "Assign work to one agent at a time, do not call agents in parallel.\n"
             "Do not do any work yourself."
         ),

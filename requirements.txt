@@ -16,3 +16,4 @@ pydub
 fastapi
 uvicorn
 python-multipart
+audio_recorder_streamlit

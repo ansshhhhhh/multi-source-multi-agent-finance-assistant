@@ -13,6 +13,8 @@ app = FastAPI()
 async def supervisor(Query: str):
     supervisor = get_supervisor()
     result = supervisor.invoke({'messages':[Query]})
+    for i in result['messages']:
+        i.pretty_print()
     return result
 
 @app.post('/agents/api_agent')

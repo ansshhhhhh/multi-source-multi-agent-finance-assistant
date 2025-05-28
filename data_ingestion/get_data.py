@@ -6,15 +6,22 @@ from langchain_community.document_loaders import WebBaseLoader
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import os
 import shutil
+from dotenv import load_dotenv
+import google.generativeai as genai
+
+
+load_dotenv()
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 vectorstore_path = "data_ingestion/faiss_index"
 embeddings = GoogleGenerativeAIEmbeddings(model = "models/gemini-embedding-exp-03-07")
+# embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 def get_pdf_text(pdf):
     text=""
     pdf_reader= PdfReader(pdf)
     for page in pdf_reader.pages:
-        text+= page.extract_text()
+        text += page.extract_text()
     return  text
 
 def add_web_docs(urls:list[str]):
@@ -47,13 +54,11 @@ def delete_vector_store():
     return True
 
 def create_vector_store(chunks: list[str] = ["Hello world!"]):
-    embeddings = GoogleGenerativeAIEmbeddings(model = "models/gemini-embedding-exp-03-07")
     vector_store = FAISS.from_texts(chunks, embedding=embeddings)
     vector_store.save_local(vectorstore_path)
     return vector_store
     
 def get_vector_store():
-    embeddings = GoogleGenerativeAIEmbeddings(model = "models/gemini-embedding-exp-03-07")
     if not os.path.exists(vectorstore_path):
         return create_vector_store()
     vectorstore = FAISS.load_local(vectorstore_path, embeddings, allow_dangerous_deserialization=True)

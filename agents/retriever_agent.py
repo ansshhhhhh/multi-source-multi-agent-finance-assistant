@@ -20,6 +20,7 @@ def get_retriever_agent():
         "INSTRUCTIONS:\n"
         "- Get the data from the vector store.\n"
         "- After you're done with your tasks, respond to the supervisor directly\n"
+        "- if retrieval confidence < threshold, prompt user clarification.\n"
         "- Respond ONLY with the results of your work, do NOT include ANY other text."
     ),
     name="retriever_agent",
