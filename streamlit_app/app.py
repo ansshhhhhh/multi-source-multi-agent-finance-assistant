@@ -5,7 +5,7 @@ from audio_recorder_streamlit import audio_recorder
 import base64
 
 # Replace with your FastAPI backend URL
-API_BASE_URL = "http://127.0.0.1:8000/"
+API_BASE_URL = "http://localhost:8000/"
 
 
 def speech_to_text(wav_bytes_io):
