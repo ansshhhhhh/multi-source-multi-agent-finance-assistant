@@ -53,7 +53,7 @@ def user_input(query):
         ado = None  # To collect all audio segments
         
         for i in response.json()['messages']:
-            if i['type'] == 'ai' and i['content'] != "":
+            if i['content'] != "":
                 with st.container():
                     st.markdown(f"**{i['name']}**")
                     st.markdown(i['content'])
