@@ -5,7 +5,6 @@ from audio_recorder_streamlit import audio_recorder
 import base64
 import re
 
-# Replace with your FastAPI backend URL
 API_BASE_URL = "http://localhost:8000/"
 
 

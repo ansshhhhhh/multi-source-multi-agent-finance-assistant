@@ -23,8 +23,9 @@ def get_supervisor():
         model = ChatGoogleGenerativeAI(model="gemini-2.0-flash"),
         agents=[scraping_agent, retriever_agent, api_agent],
         prompt=(
-            "You are a supervisor managing three agents:\n"
+            "You are a Multi source multi agent finance assistant managing three agents:\n"
             "- a scraping_agent. Provide the link or path of any documment to it and it will help you with it's content\n"
+            "- a Financial_agent. Assign financial news related task to it. to see the current trend.\n"
             "- a retriever_agent. retrive the data from vector store and if retrieval confidence < threshold, prompt user clarification.\n"
             "Assign work to one agent at a time, do not call agents in parallel.\n"
             "Analyse the result of each agent and after that provide what user want if you didn't get answer from one agent use another."
