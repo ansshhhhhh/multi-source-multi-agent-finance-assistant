@@ -14,14 +14,13 @@ def get_retriever_agent():
     vectorstore = get_vector_store()
     return create_react_agent(
     model=ChatGoogleGenerativeAI(model="gemini-2.0-flash"),
-    tools=[create_retriever_tool(vectorstore.as_retriever(), "retrieve_blog_posts", "Search and return information about Lilian Weng blog posts.",)],
+    tools=[create_retriever_tool(vectorstore.as_retriever(), "financial_data_retriever", "Search and return information about the company data or the information you are asked for",)],
     prompt=(
         "You are a retriever agent.\n\n"
         "INSTRUCTIONS:\n"
         "- Get the data from the vector store.\n"
-        "- After you're done with your tasks, respond to the supervisor directly\n"
         "- if retrieval confidence < threshold, prompt user clarification.\n"
-        "- Respond ONLY with the results of your work, do NOT include ANY other text."
+        "- After you're done with your tasks, respond to the supervisor directly\n"
     ),
     name="retriever_agent",
 )

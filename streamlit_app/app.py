@@ -3,6 +3,7 @@ import io
 import requests
 from audio_recorder_streamlit import audio_recorder
 import base64
+import re
 
 # Replace with your FastAPI backend URL
 API_BASE_URL = "http://localhost:8000/"
@@ -20,9 +21,10 @@ def text_to_speech(text, lang="en"):
     if text == "" or not text:
         return None
 
+    clean = re.sub(r'[^\w\s]', '', text)
     response = requests.post(
         f"{API_BASE_URL}/agents/voice-agent/tts",
-        data={"text": text, "lang": lang}
+        data={"text": clean, "lang": lang}
     )
     if response.status_code == 200:
         return response.content

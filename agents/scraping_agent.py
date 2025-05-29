@@ -44,9 +44,9 @@ def get_scraping_agent():
     prompt=(
         "You are a scraping agent.\n\n"
         "INSTRUCTIONS:\n"
-        "- Get the data from the web, pdf, csv, etc.\n"
-        "- After you're done with your tasks, respond to the supervisor directly\n"
-        "- Respond ONLY with the results of your work, do NOT include ANY other text."
+        "- Use the provided links and file paths to scratch data from the file.\n"
+        "- Get the data from the web, pdf, csv\n"
+        "- After you're done with your tasks, respond to the supervisor directly"
     ),
     name="scraping_agent",
 )
