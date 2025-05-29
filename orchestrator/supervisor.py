@@ -32,6 +32,7 @@ def get_supervisor():
         ),
         add_handoff_back_messages=True,
         output_mode="full_history",
+        supervisor_name = 'Multi source Multi agent finance assistant' 
     ).compile()
 
 # supervisor = get_supervisor()
