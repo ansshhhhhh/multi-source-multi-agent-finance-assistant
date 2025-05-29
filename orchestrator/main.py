@@ -37,8 +37,8 @@ def scraping_agent(Query: str):
     return result
 
 @app.post("/agents/voice-agent/stt")
-def speech_to_text_api(file: UploadFile = File(...), format: str = Form(...)):
-    content = file.read()
+async def speech_to_text_api(file: UploadFile = File(...), format: str = Form(...)):
+    content = await file.read()
     wav_bytes = convert_to_wav_bytes(BytesIO(content), format)
     text = speech_to_text(wav_bytes)
     if text is None:

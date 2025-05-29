@@ -15,7 +15,8 @@ def speech_to_text(wav_bytes_io):
         files={"file": ("audio.wav", wav_bytes_io)},
         data={"format": "wav"}
     )
-    return response.json().get("text", "")
+    if response.status_code == 200:
+        return response.json().get("text", "")
 
 def text_to_speech(text, lang="en"):
     if text == "" or not text:
@@ -48,22 +49,24 @@ def play_audio_hidden(audio_data):
 def user_input(query):
     response = requests.post(f"{API_BASE_URL}/supervisor", params={"Query": query})
     if response.status_code == 200:
-        print(response.json())
         
         ado = None  # To collect all audio segments
         
         for i in response.json()['messages']:
-            if i['content'] != "":
+            print(i)
+            print("\n")
+            if i['content'] != "" and i['type'] != 'human':
                 with st.container():
                     st.markdown(f"**{i['name']}**")
                     st.markdown(i['content'])
 
                 # Text-to-speech
-                tts_audio = text_to_speech(i['content'])
-                if not ado and tts_audio:
-                    ado = tts_audio
-                elif ado and tts_audio:
-                    ado += tts_audio
+                if i['name'] == 'supervisor':
+                    tts_audio = text_to_speech(i['content'])
+                    if not ado and tts_audio:
+                        ado = tts_audio
+                    elif ado and tts_audio:
+                        ado += tts_audio
 
         if ado:
             play_audio_hidden(ado)
