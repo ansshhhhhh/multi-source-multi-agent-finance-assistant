@@ -20,8 +20,8 @@ def speech_to_text(wav_bytes_io):
 def text_to_speech(text, lang="en"):
     if text == "" or not text:
         return None
-
-    clean = re.sub(r'[^\w\s]', '', text)
+    
+    clean = re.sub(r"[^\w\s.,?]", "", text)
     response = requests.post(
         f"{API_BASE_URL}/agents/voice-agent/tts",
         data={"text": clean, "lang": lang}
@@ -50,7 +50,7 @@ def user_input(query):
     print(response.json())
     ado = None
     for i in response.json()['messages']:
-        if i['type'] == 'ai':
+        if i['type'] == 'ai' and i['content'] != "":
             st.markdown(f'**{i['name']}**')
             st.markdown(i['content'])
             tts_audio = text_to_speech(i['content'])
