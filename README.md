@@ -1,7 +1,7 @@
 ---
 license: mit
 title: Multi Source Multi Agent Finance Assistant
-sdk: streamlit
+sdk: docker
 emoji: 🚀
 colorFrom: yellow
 colorTo: red
