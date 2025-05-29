@@ -52,7 +52,7 @@ def user_input(query):
     answer = ""
     for i in response.json()['messages']:
         if i['type'] == 'ai' and i['content'] != "":
-            ans += f'**{i['name']}**\n {i['content']}'
+            answer += f'**{i['name']}**\n {i['content']}'
             tts_audio = text_to_speech(i['content'])
             if not ado and tts_audio:
                 ado = tts_audio
