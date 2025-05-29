@@ -85,27 +85,49 @@ def delete_vector_store():
 
 
 def main():
+    # Setup the page
     st.set_page_config("Finance Assistant", initial_sidebar_state='collapsed')
     st.header("Multi-Source Multi-Agent Finance Assistant")
 
+    # Initialize session state
+    if 'submitted' not in st.session_state:
+        st.session_state['submitted'] = False
+    if 'user_question' not in st.session_state:
+        st.session_state['user_question'] = ""
+    if 'text_input' not in st.session_state:
+        st.session_state['text_input'] = ""
+
+    # Layout: Input via text and audio
     col1, col2 = st.columns([8, 1])
+
     with col1:
-        user_question = st.text_input("Ask a Question from the context provided")
+        st.session_state.text_input = st.text_input(
+            "Ask a Question from the context provided", 
+            value=st.session_state.text_input, 
+            key="text_input_field"
+        )
+
+        if st.session_state.text_input:
+            st.session_state.user_question = st.session_state.text_input
+            st.session_state.submitted = True
+            st.session_state.text_input = ""  # Clear input bar
+
     with col2:
-        st.write('\n')
-        st.write('\n')
+        st.write("\n" * 2)
         audio = audio_recorder(text="", icon_size="2x")
+        if audio:
+            wav_bytes_io = io.BytesIO(audio)
+            st.session_state.user_question = speech_to_text(wav_bytes_io)
+            st.session_state.submitted = True
 
-    if audio:
-        wav_bytes_io = io.BytesIO(audio)
-        user_question = speech_to_text(wav_bytes_io)
-        audio = None
-
-    if user_question:
-        st.write(user_question)
-        user_input(user_question)
-        user_question = None
-
+    # If question is ready, process it
+    if st.session_state.submitted and st.session_state.user_question:
+        st.write(st.session_state.user_question)
+        user_input(st.session_state.user_question)
+        # Reset after processing
+        st.session_state.submitted = False
+        st.session_state.user_question = ""
+        
     with st.sidebar:
         st.title("Menu:")
         if st.button("Clear existing data"):
