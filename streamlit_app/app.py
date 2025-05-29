@@ -110,7 +110,7 @@ def main():
 
     with col1:
         st.session_state.text_input = st.text_input(
-            "Ask a Question from the context provided", 
+            "What are you financial Queries!", 
             value=st.session_state.text_input, 
             key="text_input_field"
         )
@@ -129,11 +129,9 @@ def main():
             st.session_state.submitted = True
             audio = None
 
-    # If question is ready, process it
     if st.session_state.submitted and st.session_state.user_question:
         st.write(st.session_state.user_question)
         user_input(st.session_state.user_question)
-        # Reset after processing
         st.session_state.submitted = False
         st.session_state.user_question = ""
 
