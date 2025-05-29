@@ -55,7 +55,7 @@ def user_input(query):
         for i in response.json()['messages']:
             print(i)
             print("\n")
-            if i['content'] != "" and i['type'] != 'human':
+            if i['content'] != "" and i['type'] == 'ai':
                 with st.container():
                     st.markdown(f"**{i['name']}**")
                     st.markdown(i['content'])
@@ -128,6 +128,7 @@ def main():
             wav_bytes_io = io.BytesIO(audio)
             st.session_state.user_question = speech_to_text(wav_bytes_io)
             st.session_state.submitted = True
+            audio = None
 
     # If question is ready, process it
     if st.session_state.submitted and st.session_state.user_question:
