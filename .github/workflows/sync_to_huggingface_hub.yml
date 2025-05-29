@@ -17,4 +17,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://arihant18:$HF_TOKEN@https://huggingface.co/spaces/arihant18/multi-source-multi-agent-finance-assistant main
+        run: git push --force https://arihant18:$HF_TOKEN@https://huggingface.co/spaces/arihant18/multi-source-multi-agent-finance-assistant main
