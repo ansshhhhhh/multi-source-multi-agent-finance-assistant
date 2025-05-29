@@ -50,7 +50,8 @@ def user_input(query):
     print(response.json())
     ado = None
     for i in response.json()['messages']:
-        if i['type'] == 'ai' and i['name']=='supervisor':
+        if i['type'] == 'ai':
+            st.markdown(f'**{i['name']}**')
             st.markdown(i['content'])
             tts_audio = text_to_speech(i['content'])
             if not ado and tts_audio:
