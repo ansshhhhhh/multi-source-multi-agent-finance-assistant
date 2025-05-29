@@ -7,6 +7,7 @@ from agents.scraping_agent import get_scraping_agent
 from agents.voice_agent import *
 from data_ingestion.get_data import *
 
+
 app = FastAPI()
 
 @app.post('/supervisor')
