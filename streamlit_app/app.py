@@ -49,16 +49,16 @@ def user_input(query):
     response = requests.post(f"{API_BASE_URL}/supervisor", params={"Query": query})
     print(response.json())
     ado = None
+    answer = ""
     for i in response.json()['messages']:
         if i['type'] == 'ai' and i['content'] != "":
-            st.markdown(f'**{i['name']}**')
-            st.markdown(i['content'])
+            ans += f'**{i['name']}**\n {i['content']}'
             tts_audio = text_to_speech(i['content'])
             if not ado and tts_audio:
                 ado = tts_audio
             elif ado and tts_audio:
                 ado += tts_audio
-            
+    st.markdown(answer)
     if ado:
         play_audio_hidden(ado)
 
@@ -127,7 +127,7 @@ def main():
         # Reset after processing
         st.session_state.submitted = False
         st.session_state.user_question = ""
-        
+
     with st.sidebar:
         st.title("Menu:")
         if st.button("Clear existing data"):
