@@ -60,7 +60,7 @@ def user_input(query):
                     st.markdown(i['content'])
 
                 # Text-to-speech
-                if i['name'] == 'supervisor':
+                if i['name'] == 'Multi source Multi agent finance assistant':
                     tts_audio = text_to_speech(i['content'])
                     if not ado and tts_audio:
                         ado = tts_audio
