@@ -77,18 +77,30 @@ def upload_pdf_to_backend(file):
         f"{API_BASE_URL}/data_ingestion/pdf",
         files={"file": (file.name, file, file.type)}
     )
-    return response.json()
+    if response.status_code == 200:
+        st.info("pdf added successfully.")
+        return response.json()
+    else:
+        st.error("Unable to added the pdf.")
 
 def upload_url_to_backend(url):
     response = requests.post(
         f"{API_BASE_URL}/data_ingestion/urls",
         params = {"urls": [url]}
     )
-    return response.json()
+    if response.status_code == 200: 
+        st.info("Url added successfully.")
+        return response.json()
+    else:
+        st.error("Unable to added the Url")
+        
 
 def delete_vector_store():
     response = requests.get(f"{API_BASE_URL}/data_ingestion/delete_vectordb")
-    return response.json()
+    if response.status_code == 200:
+        return response.json()
+    else:
+        st.error("Unable to Delete the vector store.")
 
 
 
