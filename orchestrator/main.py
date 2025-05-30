@@ -67,8 +67,11 @@ def add_web_docs(urls: list[str]):
 
 @app.get("/data_ingestion/delete_vectordb")
 def delete_vectordb():
-    delete_vector_store()
-    return {'success' : True}
+    try:
+        delete_vector_store()
+        return {'success' : True}
+    except:
+        return {'success': False}
 
 @app.get('/')
 async def home():
